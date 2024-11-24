@@ -4,9 +4,9 @@ import { resolve } from 'path';
 export default defineConfig({
   build: {
     lib: {
-      entry: './lib/outStreamPlayer.ts',
-      name: 'OutStreamPlayer',
-      fileName: 'out-stream-player',
+      entry: './lib/InRenderer',
+      name: 'InRenderer',
+      fileName: 'in-renderer',
     },
   },
   test: {

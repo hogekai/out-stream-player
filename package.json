@@ -1,21 +1,21 @@
 {
-  "name": "out-stream-player",
+  "name": "in-renderer-js",
   "private": false,
   "version": "0.0.0",
   "files": [
     "dist",
     "index.d.ts"
   ],
-  "main": "./dist/out-stream-player.umd.cjs",
-  "module": "./dist/out-stream-player.js",
+  "main": "./dist/in-renderer.umd.js",
+  "module": "./dist/in-renderer.mjs",
   "types": "./index.d.ts",
   "exports": {
     "types": "./index.d.ts",
-    "import": "./dist/out-stream-player.js",
-    "require": "./dist/out-stream-player.umd.cjs"
+    "import": "./dist/in-renderer.mjs",    
+    "require": "./dist/in-renderer.umd.js"
   },
   "repository": {
-    "url": "git@github.com:hogekai/out-stream-player.git"
+    "url": "git@github.com:hogekai/in-renderer.git"
   },
   "author": {
     "name": "Kai Miyamoto"
