@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "moduleResolution": "bundler",
+      "types": [
+        "vitest/globals"
+      ],
+      "baseUrl": "..",
+    },
+    "include": ["./**/*.ts", "../src/env.d.ts"]
+  }
+  

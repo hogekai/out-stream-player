@@ -1,26 +1,39 @@
 {
-  "name": "outstream-player",
-  "private": true,
+  "name": "out-stream-player",
+  "private": false,
   "version": "0.0.0",
-  "type": "module",
   "files": [
     "dist",
     "index.d.ts"
   ],
-  "main": "./dist/counter.umd.cjs",
-  "module": "./dist/counter.js",
+  "main": "./dist/out-stream-player.umd.cjs",
+  "module": "./dist/out-stream-player.js",
   "types": "./index.d.ts",
   "exports": {
     "types": "./index.d.ts",
-    "import": "./dist/counter.js",
-    "require": "./dist/counter.umd.cjs"
+    "import": "./dist/out-stream-player.js",
+    "require": "./dist/out-stream-player.umd.cjs"
   },
+  "repository": {
+    "url": "git@github.com:hogekai/out-stream-player.git"
+  },
+  "author": {
+    "name": "Kai Miyamoto"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "test": "vitest"
   },
   "devDependencies": {
+    "path": "^0.12.7",
     "typescript": "~5.6.3",
-    "vite": "^5.4.9"
+    "url": "^0.11.4",
+    "vite": "^5.4.9",
+    "vitest": "^2.1.5"
+  },
+  "dependencies": {
+    "fluid-player": "^3.44.0"
   }
 }

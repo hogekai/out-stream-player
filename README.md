@@ -1,1 +1,1 @@
-# outstream-player
+# OutStreamPlayer
