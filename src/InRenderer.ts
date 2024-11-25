@@ -1,7 +1,7 @@
+import '@/style/InRenderer.css';
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
 import { BannerBid, Bid, VideoBid } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
-import '@/style/InRenderer.css';
 import { BannerRenderer } from "./core/banner/BannerRenderer";
 
 export class InRenderer {

@@ -16,6 +16,7 @@ describe("In renderer", () => {
     const sut = new InRenderer();
 
     await sut.render("ad", {
+      adUnitCode: '11',
       mediaType: "video",
       width: 1000,
       height: 1000,
