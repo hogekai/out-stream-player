@@ -1,6 +1,7 @@
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
 import { Bid, VideoBid } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
+import '@/style/InRenderer.css';
 
 export class InRenderer {
   public async render(targetId: string, bid: Bid) {

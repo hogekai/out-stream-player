@@ -14,11 +14,9 @@ export class OutStreamVideoPlayer {
   }
 
   public async play() {
-    const fluidPlayerFactory = new FluidPlayerFactory(
-      this.createVideoElement(this.target),
-      this.options
-    );
-    await fluidPlayerFactory.create();
+    const video = this.createVideoElement(this.target);
+    const fluidPlayerFactory = new FluidPlayerFactory(video, this.options);
+    await fluidPlayerFactory.create(this.play.bind(this));
   }
 
   private createVideoElement(divElement: HTMLDivElement): HTMLVideoElement {

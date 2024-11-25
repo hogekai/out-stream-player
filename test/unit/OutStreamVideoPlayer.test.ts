@@ -21,6 +21,7 @@ describe("OutStream video player", () => {
     const videoElement = div.querySelector("video");
     expect(fluidPlayerMock).toHaveBeenCalledWith(videoElement, {
       layoutControls: {
+        roundedCorners: 8,
         fillToContainer: true,
         autoPlay: true,
         mute: true,
@@ -28,15 +29,33 @@ describe("OutStream video player", () => {
         keyboardControl: false,
         loop: false,
         allowTheatre: false,
+        miniPlayer: {
+          enabled: false,
+        },
+        preload: "auto",
+        persistentSettings: {
+          volume: false,
+          quality: false,
+          speed: false,
+          theatre: false,
+        },
+        layout: "in-renderer-js",
       },
       vastOptions: {
+        allowVPAID: true,
+        showPlayButton: true,
         adList: [
           {
+            adClickable: true,
+            adText: "Learn More",
             roll: "preRoll",
             vastTag: "https://example.com/vasturl",
             fallbackVastTags: [""],
           },
         ],
+        vastAdvanced: {
+          vastVideoEndedCallback: expect.any(Function),
+        },
       },
     });
   });
@@ -51,28 +70,29 @@ describe("OutStream video player", () => {
     await sut.play();
 
     const videoElement = div.querySelector("video");
-    expect(fluidPlayerMock).toHaveBeenCalledWith(videoElement, {
-      layoutControls: {
-        fillToContainer: true,
-        autoPlay: true,
-        mute: true,
-        doubleclickFullscreen: false,
-        keyboardControl: false,
-        loop: false,
-        allowTheatre: false,
-      },
-      vastOptions: {
-        adList: [
-          {
-            roll: "preRoll",
-            vastTag: "",
-            fallbackVastTags: [
-              "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
-            ],
+    expect(fluidPlayerMock).toHaveBeenCalledWith(
+      videoElement,
+      expect.objectContaining({
+        vastOptions: {
+          allowVPAID: true,
+          showPlayButton: true,
+          adList: [
+            {
+              adClickable: true,
+              adText: "Learn More",
+              roll: "preRoll",
+              vastTag: "",
+              fallbackVastTags: [
+                "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
+              ],
+            },
+          ],
+          vastAdvanced: {
+            vastVideoEndedCallback: expect.any(Function),
           },
-        ],
-      },
-    });
+        },
+      })
+    );
   });
 
   it("If both VAST URL and VAST XML are specified, VAST XML is specified as the fallback", async () => {
@@ -86,27 +106,28 @@ describe("OutStream video player", () => {
     await sut.play();
 
     const videoElement = div.querySelector("video");
-    expect(fluidPlayerMock).toHaveBeenCalledWith(videoElement, {
-      layoutControls: {
-        fillToContainer: true,
-        autoPlay: true,
-        mute: true,
-        doubleclickFullscreen: false,
-        keyboardControl: false,
-        loop: false,
-        allowTheatre: false,
-      },
-      vastOptions: {
-        adList: [
-          {
-            roll: "preRoll",
-            vastTag: "https://example.com/vasturl",
-            fallbackVastTags: [
-              "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
-            ],
+    expect(fluidPlayerMock).toHaveBeenCalledWith(
+      videoElement,
+      expect.objectContaining({
+        vastOptions: {
+          allowVPAID: true,
+          showPlayButton: true,
+          adList: [
+            {
+              adClickable: true,
+              adText: "Learn More",
+              roll: "preRoll",
+              vastTag: "https://example.com/vasturl",
+              fallbackVastTags: [
+                "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
+              ],
+            },
+          ],
+          vastAdvanced: {
+            vastVideoEndedCallback: expect.any(Function),
           },
-        ],
-      },
-    });
+        },
+      })
+    );
   });
 });
