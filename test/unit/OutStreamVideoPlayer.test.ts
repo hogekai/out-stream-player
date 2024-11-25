@@ -13,6 +13,12 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
+      adUnitCode: "ad-unit",
+      playerWidth: 640,
+      playerHeight: 480,
+      width: 100,
+      height: 100,
+      mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
     });
 
@@ -64,6 +70,12 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
+      adUnitCode: "ad-unit",
+      playerWidth: 640,
+      playerHeight: 480,
+      width: 100,
+      height: 100,
+      mediaType: 'video',
       vastXml: "<VAST></VAST>",
     });
 
@@ -99,6 +111,12 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
+      adUnitCode: "ad-unit",
+      playerWidth: 640,
+      playerHeight: 480,
+      width: 100,
+      height: 100,
+      mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
       vastXml: "<VAST></VAST>",
     });

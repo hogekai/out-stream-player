@@ -14,7 +14,7 @@ export default defineConfig({
     alias: {
       "@": resolve(__dirname, "./src"),
     },
-    environment: 'jsdom'
+    environment: 'happy-dom'
   },
   resolve: {
     alias: {

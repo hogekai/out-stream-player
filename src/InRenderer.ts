@@ -1,7 +1,8 @@
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
-import { Bid, VideoBid } from "@/type";
+import { BannerBid, Bid, VideoBid } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
 import '@/style/InRenderer.css';
+import { BannerRenderer } from "./core/banner/BannerRenderer";
 
 export class InRenderer {
   public async render(targetId: string, bid: Bid) {
@@ -15,33 +16,18 @@ export class InRenderer {
 
     if (bid.mediaType === "video") {
       await this.renderVideo(target, bid);
+    } else if (bid.mediaType === 'banner') {
+      this.renderBanner(target, bid);
     }
   }
 
   private async renderVideo(target: HTMLDivElement, bid: VideoBid) {
-    this.renderVideoContainer(target, bid);
-
-    const outStreamVideoPlayer = new OutStreamVideoPlayer(target, {
-      vastUrl: bid.vastUrl,
-      vastXml: bid.vastXml,
-    });
+    const outStreamVideoPlayer = new OutStreamVideoPlayer(target, bid);
     await outStreamVideoPlayer.play();
   }
 
-  private renderVideoContainer(target: HTMLDivElement, bid: VideoBid) {
-    const aspectRatio = bid.playerHeight / bid.playerWidth;
-
-    target.style.maxWidth = `${bid.playerWidth}px`;
-    target.style.width = "100%";
-
-    const containerWidth = target.offsetWidth;
-    const height = containerWidth * aspectRatio;
-    target.style.height = height + 'px';
-    
-    window.addEventListener('resize', () => {
-      const newWidth = target.offsetWidth;
-      const newHeight = newWidth * aspectRatio;
-      target.style.height = newHeight + 'px';
-    });
+  private renderBanner(target: HTMLDivElement, bid: BannerBid) {
+    const bannerRenderer = new BannerRenderer(target, bid);
+    bannerRenderer.render();
   }
 }

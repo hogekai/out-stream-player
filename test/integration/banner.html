@@ -17,18 +17,14 @@
         {
           code: "app",
           mediaTypes: {
-            video: {
-              context: "outstream",
-              playerSize: [640, 360],
-              minduration: 0,
-              maxduration: 120,
-              mimes: ["video/mp4"],
-              protocols: [5],
-            },
+            banner: {
+                sizes: sizes
+            }
           },
           renderer: {
             url: "./fakeRenderer.js",
             render: (bid) => {
+              console.log(bid);
               const inRenderer = new InRenderer();
               inRenderer.render("app", bid);
             },
@@ -39,13 +35,6 @@
               params: {
                 placement: 123,
                 site: 123,
-              },
-            },
-            {
-              bidder: "pubmatic",
-              params: {
-                publisherId: "156276",
-                adSlot: "pubmatic_test",
               },
             },
           ],
