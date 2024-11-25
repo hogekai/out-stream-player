@@ -1,4 +1,5 @@
 import { InvalidBidException } from "@/exception/InvalidBidException";
+import { i18n } from "@/I18N";
 import { fluidPlayer } from "@/lib/fluidPlayer";
 import { OutStreamVideoPlayerOptions } from "@/type";
 import { isString, isUrl } from "@/util/validator";
@@ -47,7 +48,7 @@ export class FluidPlayerFactory {
         showPlayButton: true,
         adList: [
           {
-            adText: "Learn More",
+            adText: i18n.t('LearnMore'),
             adClickable: true,
             roll: "preRoll",
             vastTag: this.getVastUrl(this.options.vastUrl),
@@ -105,7 +106,7 @@ export class FluidPlayerFactory {
     replayButton.appendChild(replayIcon);
 
     const replayText = document.createElement("span");
-    replayText.textContent = "Replay";
+    replayText.textContent = i18n.t('Replay');
     replayButton.appendChild(replayText);
 
     endCard.appendChild(replayButton);

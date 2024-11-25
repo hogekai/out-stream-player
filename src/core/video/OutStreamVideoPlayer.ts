@@ -1,5 +1,6 @@
 import { VideoBid } from "@/type";
 import { FluidPlayerFactory } from "./FluidPlayerFactory";
+import { i18n } from "@/I18N";
 
 export class OutStreamVideoPlayer {
   private target: HTMLDivElement;

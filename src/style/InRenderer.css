@@ -7,7 +7,8 @@
     left: 10px;
     color: white;
     font-size: 15px;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     filter: drop-shadow(0px 0px 4px rgb(86, 86, 86));
   }
 
@@ -79,10 +80,12 @@
     background: none;
     top: 4px !important;
     left: 4px !important;
-    font-size: 17px;
+    font-size: 15px;
     filter: drop-shadow(0px 0px 4px rgb(86, 86, 86));
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     padding: 13px;
+    color: white;
   }
 
   .ad_end_card {
@@ -98,17 +101,16 @@
 
   .ad_replay {
     position: relative;
-    width: 40px;
-    height: 40px;
     cursor: pointer;
     color: white;
     text-align: center;
     filter: drop-shadow(2px 1px 4px rgb(170, 170, 170));
     padding: 10px;
+    font-size: 14px;
   }
 
   .ad_replay_icon {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     margin-left: auto;
     margin-right: auto;
     width: 36px;
