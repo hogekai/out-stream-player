@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
 
-    <script async src="./test/integration/prebid.js"></script>
-    <link rel="stylesheet" href="./src/style/InRenderer.css" />
+    <script async src="./prebid.js"></script>
 
     <script type="module">
       import { InRenderer } from "@/InRenderer";
@@ -28,9 +27,8 @@
             },
           },
           renderer: {
-            url: "./test.js",
+            url: "./fakePlayer.js",
             render: (bid) => {
-              console.log(bid);
               const inRenderer = new InRenderer();
               inRenderer.render("app", bid);
             },
@@ -100,7 +98,5 @@
   </head>
   <body>
     <div id="app" style="min-height: 200px"></div>
-
-    <script type="module"></script>
   </body>
 </html>
