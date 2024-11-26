@@ -3,10 +3,17 @@ import { resolve } from "path";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
 import autoprefixer from "autoprefixer";
 import { getBabelOutputPlugin } from "@rollup/plugin-babel";
-import postcssNesting from 'postcss-nesting';
+import postcssNesting from "postcss-nesting";
+import dtsPlugin from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [libInjectCss()],
+  plugins: [
+    libInjectCss(),
+    dtsPlugin({
+      outputDir: "dist",
+      tsconfigPath: resolve(__dirname, "tsconfig.build.json"),
+    }),
+  ],
   build: {
     lib: {
       entry: "./lib/in-renderer",
@@ -41,7 +48,7 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [autoprefixer, postcssNesting],
+      plugins: [autoprefixer(), postcssNesting],
     },
   },
   test: {
