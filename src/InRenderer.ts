@@ -1,4 +1,5 @@
 import "@/style/InRenderer.css";
+import './polyfills';
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
 import { BannerBid, Bid, InRendererOptions, VideoBid } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
