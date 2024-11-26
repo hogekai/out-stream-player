@@ -23,10 +23,13 @@
       "maxduration": 120,
       "mimes": ["video/mp4"],
       "protocols": [5]
+    },
+    "banner": {
+      "size": [[300, 250]]
     }
   },
   "renderer": {
-    "url": "./fakeRenderer.js",
+    "url": "https://cdn.jsdelivr.net/npm/in-renderer-js@latest/dist/in-renderer.umd.min.js",
     "render": (bid) => {
       const inRenderer = new InRenderer();
       inRenderer.render("video-unit", bid);
