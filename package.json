@@ -15,7 +15,7 @@
     "require": "./dist/in-renderer.umd.js"
   },
   "repository": {
-    "url": "git@github.com:hogekai/in-renderer.git"
+    "url": "git@github.com:hogekai/in-renderer-js.git"
   },
   "author": {
     "name": "Kai Miyamoto"
