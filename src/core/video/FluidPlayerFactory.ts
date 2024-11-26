@@ -25,7 +25,7 @@ export class FluidPlayerFactory {
         // @ts-ignore
         roundedCorners: 8,
         fillToContainer: true,
-        autoPlay: true,
+        autoPlay: false,
         mute: true,
         doubleclickFullscreen: false,
         keyboardControl: false,
