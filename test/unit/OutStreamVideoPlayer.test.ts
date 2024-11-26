@@ -31,7 +31,7 @@ describe("OutStream video player", () => {
       layoutControls: {
         roundedCorners: 8,
         fillToContainer: true,
-        autoPlay: true,
+        autoPlay: false,
         mute: true,
         doubleclickFullscreen: false,
         keyboardControl: false,
