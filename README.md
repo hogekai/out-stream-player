@@ -4,7 +4,7 @@
 
 ## Description
 
-This library was created due to the lack of support for outstream video ads in Prebid.js.
+This library was created because the ecosystem around outstream video advertising in Prebid.js is not in place.
 
 This library enables multi-format rendering, including outstream video ads, with the goal of promoting the introduction of multi-format ad slots, including video formats, for publishers and bidder adapters.
 
