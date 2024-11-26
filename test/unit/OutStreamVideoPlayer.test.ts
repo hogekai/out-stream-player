@@ -20,6 +20,8 @@ describe("OutStream video player", () => {
       height: 100,
       mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
+      cpm: 1,
+      originalCpm: 100,
     });
 
     await sut.play();
@@ -77,6 +79,8 @@ describe("OutStream video player", () => {
       height: 100,
       mediaType: 'video',
       vastXml: "<VAST></VAST>",
+      cpm: 1,
+      originalCpm: 100,
     });
 
     await sut.play();
@@ -119,6 +123,8 @@ describe("OutStream video player", () => {
       mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
       vastXml: "<VAST></VAST>",
+      cpm: 1,
+      originalCpm: 100,
     });
 
     await sut.play();

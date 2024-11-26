@@ -1,11 +1,15 @@
-import '@/style/InRenderer.css';
+import "@/style/InRenderer.css";
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
-import { BannerBid, Bid, VideoBid } from "@/type";
+import { BannerBid, Bid, InRendererOptions, VideoBid } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
 import { BannerRenderer } from "./core/banner/BannerRenderer";
 
 export class InRenderer {
-  public async render(targetId: string, bid: Bid) {
+  public async render(
+    targetId: string,
+    bid: Bid,
+    options: InRendererOptions = {}
+  ) {
     const target = document.getElementById(targetId) as HTMLDivElement;
 
     if (!target) {
@@ -16,8 +20,8 @@ export class InRenderer {
 
     if (bid.mediaType === "video") {
       await this.renderVideo(target, bid);
-    } else if (bid.mediaType === 'banner') {
-      this.renderBanner(target, bid);
+    } else if (bid.mediaType === "banner") {
+      this.renderBanner(target, bid, options);
     }
   }
 
@@ -26,8 +30,14 @@ export class InRenderer {
     await outStreamVideoPlayer.play();
   }
 
-  private renderBanner(target: HTMLDivElement, bid: BannerBid) {
-    const bannerRenderer = new BannerRenderer(target, bid);
+  private renderBanner(
+    target: HTMLDivElement,
+    bid: BannerBid,
+    options: InRendererOptions
+  ) {
+    const bannerRenderer = new BannerRenderer(target, bid, {
+      clickThrough: options.clickThrough,
+    });
     bannerRenderer.render();
   }
 }

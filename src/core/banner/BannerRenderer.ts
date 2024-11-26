@@ -1,14 +1,20 @@
 import { InvalidBidException } from "@/exception/InvalidBidException";
-import { BannerBid, ValidatedBannerBid } from "@/type";
+import { BannerBid, BannerRenderOptions, ValidatedBannerBid } from "@/type";
 import { isString } from "@/util/validator";
 
 export class BannerRenderer {
   private target: HTMLDivElement;
   private bid: BannerBid;
+  private options: BannerRenderOptions;
 
-  public constructor(target: HTMLDivElement, bid: BannerBid) {
+  public constructor(
+    target: HTMLDivElement,
+    bid: BannerBid,
+    options: BannerRenderOptions = {}
+  ) {
     this.target = target;
     this.bid = bid;
+    this.options = options;
   }
 
   public render() {
@@ -19,9 +25,9 @@ export class BannerRenderer {
       const iframeDocument = iframe.contentWindow?.document;
 
       if (iframeDocument) {
-        iframeDocument.write(this.bid.ad);
+        const preprocessedBid = this.replaceMacros(this.bid, this.options);
+        iframeDocument.write(preprocessedBid.ad);
         this.setNormalizeCSS(iframeDocument);
-
         iframeDocument.close();
       }
     }
@@ -39,11 +45,11 @@ export class BannerRenderer {
     }
 
     if (!bid.height || !Number.isFinite(bid.height)) {
-      valid = false
+      valid = false;
     }
 
     if (!bid.adUnitCode || !isString(bid.adUnitCode)) {
-        valid = false;
+      valid = false;
     }
 
     return valid;
@@ -78,6 +84,26 @@ export class BannerRenderer {
     target.appendChild(iframe);
 
     return iframe;
+  }
+
+  private replaceMacros(
+    bid: ValidatedBannerBid,
+    options: BannerRenderOptions
+  ): ValidatedBannerBid {
+    let replacedAd = bid.ad;
+    replacedAd = replacedAd.replace(
+      /\${AUCTION_PRICE}/g,
+      (bid.originalCpm || bid.cpm).toString()
+    );
+    replacedAd = replacedAd.replace(
+      /\${CLICKTHROUGH}/g,
+      options.clickThrough || ""
+    );
+
+    return {
+      ...bid,
+      ad: replacedAd,
+    };
   }
 
   private setNormalizeCSS(iframeDocument: Document) {

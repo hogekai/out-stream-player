@@ -7,13 +7,13 @@ export type VideoBid = {
   adUnitCode: string;
   vastXml?: string;
   vastUrl?: string;
-  vastImpUrl?: string;
   width: number;
   height: number;
   playerWidth: number;
   playerHeight: number;
   mediaType: "video";
-  burl?: string;
+  cpm: number;
+  originalCpm: number;
 };
 
 export type BannerBid = {
@@ -22,7 +22,8 @@ export type BannerBid = {
   height: number;
   ad?: string;
   mediaType: "banner";
-  burl?: string;
+  cpm: number;
+  originalCpm?: number;
 };
 
 export type Bid =
@@ -35,12 +36,20 @@ export type Bid =
       burl?: string;
     };
 
-  
 export type ValidatedBannerBid = {
   adUnitCode: string;
   width: number;
   height: number;
   ad: string;
   mediaType: "banner";
-  burl?: string;
+  cpm: number;
+  originalCpm?: number;
+};
+
+export type BannerRenderOptions = {
+  clickThrough?: string;
+};
+
+export type InRendererOptions = {
+  clickThrough?: string;
 };
