@@ -53,7 +53,7 @@ describe("OutStream video player", () => {
         adList: [
           {
             adClickable: true,
-            adText: "Learn More",
+            adText: "LearnMore",
             roll: "preRoll",
             vastTag: "https://example.com/vasturl",
             fallbackVastTags: [""],
@@ -91,7 +91,7 @@ describe("OutStream video player", () => {
           adList: [
             {
               adClickable: true,
-              adText: "Learn More",
+              adText: "LearnMore",
               roll: "preRoll",
               vastTag: "",
               fallbackVastTags: [
@@ -133,7 +133,7 @@ describe("OutStream video player", () => {
           adList: [
             {
               adClickable: true,
-              adText: "Learn More",
+              adText: "LearnMore",
               roll: "preRoll",
               vastTag: "https://example.com/vasturl",
               fallbackVastTags: [
