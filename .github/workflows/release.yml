@@ -22,6 +22,6 @@ jobs:
       - run: pnpm install
       - run: pnpm test
       - run: pnpm build
-      - run: pnpm publish
+      - run: pnpm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
