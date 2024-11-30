@@ -1,9 +1,10 @@
 import "@/style/InRenderer.css";
 import './polyfills';
 import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
-import { BannerBid, Bid, InRendererOptions, VideoBid } from "@/type";
+import { InRendererOptions} from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
 import { BannerRenderer } from "./core/banner/BannerRenderer";
+import { BannerBid, Bid, VideoBid } from "./type/bid";
 
 export class InRenderer {
   public async render(
@@ -20,14 +21,16 @@ export class InRenderer {
     target.style.display = "block";
 
     if (bid.mediaType === "video") {
-      await this.renderVideo(target, bid);
+      await this.renderVideo(target, bid, options);
     } else if (bid.mediaType === "banner") {
       this.renderBanner(target, bid, options);
     }
   }
 
-  private async renderVideo(target: HTMLDivElement, bid: VideoBid) {
-    const outStreamVideoPlayer = new OutStreamVideoPlayer(target, bid);
+  private async renderVideo(target: HTMLDivElement, bid: VideoBid, options: InRendererOptions) {
+    const outStreamVideoPlayer = new OutStreamVideoPlayer(target, bid, {
+      logo: options.logo
+    });
     await outStreamVideoPlayer.play();
   }
 

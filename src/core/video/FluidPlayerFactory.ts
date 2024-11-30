@@ -1,17 +1,17 @@
 import { InvalidBidException } from "@/exception/InvalidBidException";
 import { i18n } from "@/I18N";
 import { fluidPlayer } from "@/lib/fluidPlayer";
-import { OutStreamVideoPlayerOptions } from "@/type";
+import { FluidPlayerFactoryOptions } from "@/type";
 import { isString, isUrl } from "@/util/validator";
 import { encode } from "js-base64";
 
 export class FluidPlayerFactory {
   private target: HTMLVideoElement;
-  private options: OutStreamVideoPlayerOptions;
+  private options: FluidPlayerFactoryOptions;
 
   public constructor(
     target: HTMLVideoElement,
-    options: OutStreamVideoPlayerOptions
+    options: FluidPlayerFactoryOptions
   ) {
     this.target = target;
     this.options = options;
@@ -42,6 +42,11 @@ export class FluidPlayerFactory {
           theatre: false,
         },
         layout: "in-renderer-js",
+        logo: {
+          imageUrl: this.options.logo?.imageUrl,
+          clickUrl: this.options.logo?.clickUrl,
+          position: "bottom left"
+        }
       },
       vastOptions: {
         allowVPAID: true,

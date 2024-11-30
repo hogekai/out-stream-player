@@ -1,5 +1,6 @@
 import { InvalidBidException } from "@/exception/InvalidBidException";
-import { BannerBid, BannerRenderOptions, ValidatedBannerBid } from "@/type";
+import { BannerRenderOptions } from "@/type";
+import { BannerBid, ValidatedBannerBid } from "@/type/bid";
 import { isString } from "@/util/validator";
 
 export class BannerRenderer {

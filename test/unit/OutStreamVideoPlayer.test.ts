@@ -22,6 +22,11 @@ describe("OutStream video player", () => {
       vastUrl: "https://example.com/vasturl",
       cpm: 1,
       originalCpm: 100,
+    }, {
+      logo: {
+        imageUrl: 'https://example.com/logo',
+        clickUrl: 'https://example.com/clickurl'
+      }
     });
 
     await sut.play();
@@ -48,6 +53,11 @@ describe("OutStream video player", () => {
           theatre: false,
         },
         layout: "in-renderer-js",
+        logo: {
+          imageUrl: 'https://example.com/logo',
+          clickUrl: 'https://example.com/clickurl',
+          position: 'bottom left',
+        }
       },
       vastOptions: {
         allowVPAID: true,
@@ -81,7 +91,7 @@ describe("OutStream video player", () => {
       vastXml: "<VAST></VAST>",
       cpm: 1,
       originalCpm: 100,
-    });
+    }, {});
 
     await sut.play();
 
@@ -125,7 +135,7 @@ describe("OutStream video player", () => {
       vastXml: "<VAST></VAST>",
       cpm: 1,
       originalCpm: 100,
-    });
+    }, {});
 
     await sut.play();
 

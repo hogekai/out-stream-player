@@ -1,13 +1,16 @@
-import { VideoBid } from "@/type";
+import { VideoBid } from "@/type/bid";
 import { FluidPlayerFactory } from "./FluidPlayerFactory";
+import { OutStreamVideoPlayerOptions } from "@/type";
 
 export class OutStreamVideoPlayer {
   private target: HTMLDivElement;
   private bid: VideoBid;
+  private options: OutStreamVideoPlayerOptions;
 
-  public constructor(target: HTMLDivElement, bid: VideoBid) {
+  public constructor(target: HTMLDivElement, bid: VideoBid, options: OutStreamVideoPlayerOptions) {
     this.target = target;
     this.bid = bid;
+    this.options = options;
   }
 
   public async play() {
@@ -16,6 +19,7 @@ export class OutStreamVideoPlayer {
     const fluidPlayerFactory = new FluidPlayerFactory(video, {
       vastUrl: this.bid.vastUrl,
       vastXml: this.bid.vastXml,
+      logo: this.options.logo
     });
     const player = await fluidPlayerFactory.create(this.play.bind(this));
 
