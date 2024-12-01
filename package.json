@@ -8,11 +8,23 @@
   ],
   "main": "./dist/in-renderer.umd.js",
   "module": "./dist/in-renderer.mjs",
-  "types": "./index.d.ts",
+  "types": "./dist/lib/in-renderer.d.ts",
   "exports": {
-    "types": "./index.d.ts",
-    "import": "./dist/in-renderer.mjs",
-    "require": "./dist/in-renderer.umd.js"
+    ".": {
+      "types": "./dist/lib/in-renderer.d.ts",
+      "import": "./dist/in-renderer.mjs",
+      "require": "./dist/in-renderer.umd.js"
+    },
+    "./video": {
+      "types": "./dist/lib/in-video-renderer.d.ts",
+      "import": "./dist/in-video-renderer.mjs",
+      "require": "./dist/in-video-renderer.umd.js"
+    },
+    "./banner": {
+      "types": "./dist/lib/in-banner-renderer.d.ts",
+      "import": "./dist/in-banner-renderer.mjs",
+      "require": "./dist/in-banner-renderer.umd.js"
+    }
   },
   "repository": {
     "url": "git@github.com:hogekai/in-renderer-js.git"
@@ -23,7 +35,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.build.json && vite build",
+    "build": "tsc --project tsconfig.build.json && vite build --config vite.in-renderer.build.config.js && vite build --config vite.in-video-renderer.build.config.js && vite build --config vite.in-banner-renderer.build.config.js",
     "test": "vitest"
   },
   "devDependencies": {
