@@ -1,3 +1,4 @@
+import { InvalidTargetElementException } from "@/exception/InvalidTargetElementException";
 import { InRenderer } from "@/InRenderer";
 
 vi.mock("fluid-player");
@@ -32,11 +33,23 @@ describe("In renderer", () => {
     expect(div.style.display).toBe("block");
   });
 
+  it('Invalid target element causes error', async () => {
+    const div = document.getElementById("ad") as HTMLDivElement;
+    div.remove();
+    const sut = new InRenderer();
+
+    await expect(() => sut.render("ad", {
+      adUnitCode: '11',
+      mediaType: "banner",
+      width: 300,
+      height: 250,
+      ad: '<div>ad</div>',
+      cpm: 1,
+    })).rejects.toThrow(InvalidTargetElementException);
+  });
+
   it('Rendering banner ads', async () => {
     const div = document.getElementById("ad") as HTMLDivElement;
-    Object.defineProperty(div, "offsetWidth", {
-      get: vi.fn().mockReturnValue(640),
-    });
     const sut = new InRenderer();
 
     await sut.render("ad", {
