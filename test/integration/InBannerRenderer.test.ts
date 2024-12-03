@@ -45,14 +45,10 @@ describe("In banner renderer", () => {
     const sut = new InBannerRenderer();
 
     await expect(() => sut.render("ad", {
-      adUnitCode: '11',
       mediaType: "video",
-      width: 300,
-      height: 250,
       playerWidth: 640,
       playerHeight: 480,
-      vastUrl: '<div>ad</div>',
-      cpm: 1,
+      vastXml: '<div>ad</div>',
     })).rejects.toThrow(InvalidBidException);
   });
 });

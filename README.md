@@ -4,13 +4,13 @@
 
 ## Description
 
-This library was created because the ecosystem around outstream video advertising in Prebid.js is not in place.
+This library was created due to the lack of an ecosystem around outstream and native video ads in Prebid.js.
 
-This library enables multi-format rendering, including outstream video ads, with the goal of promoting the introduction of multi-format ad slots, including video formats, for publishers and bidder adapters.
+This library was created with the goal of enabling multi-format rendering, including outstream and native video ads, and promoting the adoption of multi-format ad spaces, including video formats, for publishers and bidder adopters.
 
-Currently supported formats: Banner, Video
+Current supported formats: banner, video, native, native video
 
-Example:
+Examples of multi-format:.
 
 ```javascript
 {

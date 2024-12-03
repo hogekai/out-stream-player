@@ -13,15 +13,10 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
-      adUnitCode: "ad-unit",
       playerWidth: 640,
       playerHeight: 480,
-      width: 100,
-      height: 100,
       mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
-      cpm: 1,
-      originalCpm: 100,
     }, {
       logo: {
         imageUrl: 'https://example.com/logo',
@@ -68,7 +63,7 @@ describe("OutStream video player", () => {
             adText: "LearnMore",
             roll: "preRoll",
             vastTag: "https://example.com/vasturl",
-            fallbackVastTags: [""],
+            fallbackVastTags: ["data:text/xml;charset=utf-8;base64,"],
           },
         ],
         vastAdvanced: {
@@ -82,15 +77,10 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
-      adUnitCode: "ad-unit",
       playerWidth: 640,
       playerHeight: 480,
-      width: 100,
-      height: 100,
       mediaType: 'video',
       vastXml: "<VAST></VAST>",
-      cpm: 1,
-      originalCpm: 100,
     }, {});
 
     await sut.play();
@@ -107,7 +97,7 @@ describe("OutStream video player", () => {
               adClickable: true,
               adText: "LearnMore",
               roll: "preRoll",
-              vastTag: "",
+              vastTag: "data:text/xml;charset=utf-8;base64,",
               fallbackVastTags: [
                 "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
               ],
@@ -125,16 +115,11 @@ describe("OutStream video player", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const div = document.getElementById("ad") as HTMLDivElement;
     const sut = new OutStreamVideoPlayer(div, {
-      adUnitCode: "ad-unit",
       playerWidth: 640,
       playerHeight: 480,
-      width: 100,
-      height: 100,
       mediaType: 'video',
       vastUrl: "https://example.com/vasturl",
       vastXml: "<VAST></VAST>",
-      cpm: 1,
-      originalCpm: 100,
     }, {});
 
     await sut.play();

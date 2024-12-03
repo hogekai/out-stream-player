@@ -17,6 +17,8 @@ export type BannerRenderOptions = {
   clickThrough?: string;
 };
 
+export type NativeRenderOptions = {};
+
 export type InRendererOptions = {
   clickThrough?: string;
   logo?: LogoOption;

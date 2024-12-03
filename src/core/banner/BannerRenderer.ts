@@ -38,7 +38,7 @@ export class BannerRenderer {
     let valid = true;
 
     if (!bid.ad || !isString(bid.ad)) {
-      valid = true;
+      valid = false;
     }
 
     if (!bid.width || !Number.isFinite(bid.width)) {

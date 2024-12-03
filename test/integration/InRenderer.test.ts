@@ -17,14 +17,10 @@ describe("In renderer", () => {
     const sut = new InRenderer();
 
     await sut.render("ad", {
-      adUnitCode: '11',
       mediaType: "video",
-      width: 1000,
-      height: 1000,
       playerWidth: 640,
       playerHeight: 480,
-      vastUrl: "https://example.com/vasturl",
-      cpm: 1,
+      vastUrl: "https://example.com/vasturl"
     });
 
     expect(div.style.width).toBe("100%");

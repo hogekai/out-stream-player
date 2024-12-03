@@ -17,14 +17,10 @@ describe("In video renderer", () => {
     const sut = new InVideoRenderer();
 
     await sut.render("ad", {
-      adUnitCode: "11",
       mediaType: "video",
-      width: 1000,
-      height: 1000,
       playerWidth: 640,
       playerHeight: 480,
       vastUrl: "https://example.com/vasturl",
-      cpm: 1,
     });
 
     expect(div.style.width).toBe("100%");
@@ -38,14 +34,10 @@ describe("In video renderer", () => {
 
     await expect(() =>
       sut.render("ad", {
-        adUnitCode: "11",
         mediaType: "video",
-        width: 300,
-        height: 250,
         playerWidth: 640,
         playerHeight: 480,
         vastUrl: "<div>ad</div>",
-        cpm: 1,
       })
     ).rejects.toThrow(InvalidBidException);
   });

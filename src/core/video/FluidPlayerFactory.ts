@@ -137,7 +137,7 @@ export class FluidPlayerFactory {
       return vastUrl;
     }
 
-    return "";
+    return "data:text/xml;charset=utf-8;base64,";
   }
 
   private getVastDataUrl(vastXml?: string): string {
@@ -145,7 +145,7 @@ export class FluidPlayerFactory {
       return this.getVastDataUrlFromVastXml(vastXml);
     }
 
-    return "";
+    return "data:text/xml;charset=utf-8;base64,";
   }
 
   private isValidVastUrl(vastUrl?: string): vastUrl is string {

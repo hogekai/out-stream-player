@@ -1,42 +1,37 @@
+import { Native } from "./native";
+
 export type VideoBid = {
-    adUnitCode: string;
-    vastXml?: string;
-    vastUrl?: string;
-    width: number;
-    height: number;
-    playerWidth: number;
-    playerHeight: number;
-    mediaType: "video";
-    cpm: number;
-    originalCpm?: number;
-  };
-  
-  export type BannerBid = {
-    adUnitCode: string;
-    width: number;
-    height: number;
-    ad?: string;
-    mediaType: "banner";
-    cpm: number;
-    originalCpm?: number;
-  };
-  
-  export type Bid =
-    | VideoBid
-    | BannerBid
-    | {
-        width: number;
-        height: number;
-        mediaType: "native";
-        burl?: string;
-      };
-  
-  export type ValidatedBannerBid = {
-    adUnitCode: string;
-    width: number;
-    height: number;
-    ad: string;
-    mediaType: "banner";
-    cpm: number;
-    originalCpm?: number;
-  };
+  vastXml?: string;
+  vastUrl?: string;
+  playerWidth: number;
+  playerHeight: number;
+  mediaType: "video";
+};
+
+export type BannerBid = {
+  adUnitCode: string;
+  width: number;
+  height: number;
+  ad?: string;
+  mediaType: "banner";
+  cpm: number;
+  originalCpm?: number;
+};
+
+export type NativeBid = {
+  adUnitCode: string;
+  native: Native;
+  mediaType: "native";
+};
+
+export type Bid = VideoBid | BannerBid | NativeBid;
+
+export type ValidatedBannerBid = {
+  adUnitCode: string;
+  width: number;
+  height: number;
+  ad: string;
+  mediaType: "banner";
+  cpm: number;
+  originalCpm?: number;
+};

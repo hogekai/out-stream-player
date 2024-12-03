@@ -24,6 +24,11 @@
       "types": "./dist/lib/in-banner-renderer.d.ts",
       "import": "./dist/in-banner-renderer.mjs",
       "require": "./dist/in-banner-renderer.umd.js"
+    },
+    "./native": {
+      "types": "./dist/lib/in-native-renderer.d.ts",
+      "import": "./dist/in-native-renderer.mjs",
+      "require": "./dist/in-native-renderer.umd.js"
     }
   },
   "repository": {
@@ -35,7 +40,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.build.json && vite build --config vite.in-renderer.build.config.js && vite build --config vite.in-video-renderer.build.config.js && vite build --config vite.in-banner-renderer.build.config.js",
+    "build": "tsc --project tsconfig.build.json && vite build --config vite.in-renderer.build.config.js && vite build --config vite.in-video-renderer.build.config.js && vite build --config vite.in-banner-renderer.build.config.js && vite build --config vite.in-native-renderer.build.config.js",
     "test": "vitest"
   },
   "devDependencies": {
