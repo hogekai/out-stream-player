@@ -89,7 +89,7 @@ var adUnits = [
       },
     },
     renderer: {
-      url: "./fakeRenderer.js",
+      url: "https://cdn.jsdelivr.net/npm/in-renderer-js@latest/dist/in-renderer.umd.min.js",
       render: (bid) => {
         var inRenderer = new InRenderer();
         inRenderer.render("unit-1", bid);
@@ -128,3 +128,8 @@ pbjs.que.push(function () {
 ```html
 <div id="unit-1"></div>
 ```
+
+## 現在の課題
+
+- ネイティブ広告のインプレッショントラッキング
+- 請求タイミングが広告サーバー使用時でないとビューアビリティが考慮されない
