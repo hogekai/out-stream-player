@@ -99,7 +99,7 @@ var adUnits = [
       {
         bidder: "michao",
         params: {
-          placement: 123,
+          placement: "123",
           site: 123,
         },
       },
