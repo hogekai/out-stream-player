@@ -1,4 +1,4 @@
-import { HTML5Render } from "./core/HTML5AdRender";
+import { HTML5AdRender } from "./core/HTML5AdRender";
 import { InlineFrameRender } from "./core/InlineFrameRender";
 import { MacroReplacer } from "./core/MacroReplacer";
 import { InvalidBidException } from "./exception";
@@ -36,7 +36,7 @@ export class BannerRenderApplicationService
       const inlineFrameRender = new InlineFrameRender();
       const inlineFrame = inlineFrameRender.render(targetElement, bid);
 
-      const html5AdRender = new HTML5Render();
+      const html5AdRender = new HTML5AdRender();
       html5AdRender.render(inlineFrame, ad);
     } catch (error) {
       if (error instanceof InvalidBidException) {

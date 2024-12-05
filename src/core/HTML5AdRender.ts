@@ -1,4 +1,4 @@
-export class HTML5Render {
+export class HTML5AdRender {
   public render(inlineFrame: HTMLIFrameElement, ad: string) {
     const inlineFrameDocument = inlineFrame.contentWindow?.document as Document;
 

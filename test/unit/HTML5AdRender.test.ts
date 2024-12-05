@@ -1,4 +1,4 @@
-import { HTML5Render } from "@/core/HTML5AdRender";
+import { HTML5AdRender } from "@/core/HTML5AdRender";
 import { InlineFrameRender } from "@/core/InlineFrameRender";
 
 describe("HTML5 Ad Render", () => {
@@ -9,7 +9,7 @@ describe("HTML5 Ad Render", () => {
   it("HTML5広告が描画される", () => {
     const targetElement = document.getElementById("target") as HTMLDivElement;
     const inlineFrameRender = new InlineFrameRender();
-    const sut = new HTML5Render();
+    const sut = new HTML5AdRender();
     const bid = {
       adUnitCode: "ad-unit",
       width: 300,
@@ -31,7 +31,7 @@ describe("HTML5 Ad Render", () => {
   it("リセットCSSが設定されている", () => {
     const targetElement = document.getElementById("target") as HTMLDivElement;
     const inlineFrameRender = new InlineFrameRender();
-    const sut = new HTML5Render();
+    const sut = new HTML5AdRender();
     const bid = {
       adUnitCode: "ad-unit",
       width: 300,
