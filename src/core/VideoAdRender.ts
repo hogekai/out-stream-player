@@ -1,3 +1,4 @@
+import 'intersection-observer';
 import '@/style/InRenderer.css';
 import { VideoBid } from "@/type/bid";
 import { IVideoPlayer } from "@/type/interface";

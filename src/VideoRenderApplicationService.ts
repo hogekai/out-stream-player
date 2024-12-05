@@ -1,4 +1,3 @@
-import 'intersection-observer';
 import { FluidPlayerFactory } from "./core/FluidPlayerFactory";
 import { VideoAdRender } from "./core/VideoAdRender";
 import { InvalidBidException } from "./exception";

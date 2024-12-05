@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { InvalidBidException } from "@/exception/InvalidBidException";
 import { i18n } from "@/I18N";
 import { fluidPlayer } from "@/lib/fluidPlayer";
