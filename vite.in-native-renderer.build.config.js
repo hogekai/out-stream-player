@@ -18,9 +18,9 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: "./lib/in-renderer",
-      name: "InRenderer",
-      fileName: "in-renderer",
+      entry: "./lib/in-native-renderer",
+      name: "InNativeRenderer",
+      fileName: "in-native-renderer",
     },
     rollupOptions: {
       output: {

@@ -2,7 +2,6 @@ import { InvalidBidException } from "@/exception/InvalidBidException";
 import { i18n } from "@/I18N";
 import { fluidPlayer } from "@/lib/fluidPlayer";
 import { FluidPlayerFactoryOptions } from "@/type";
-import { isString, isUrl } from "@/util/validator";
 import { encode } from "js-base64";
 
 export class FluidPlayerFactory {

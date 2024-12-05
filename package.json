@@ -21,11 +21,6 @@
       "import": "./dist/in-video-renderer.mjs",
       "require": "./dist/in-video-renderer.umd.js"
     },
-    "./banner": {
-      "types": "./dist/lib/in-banner-renderer.d.ts",
-      "import": "./dist/in-banner-renderer.mjs",
-      "require": "./dist/in-banner-renderer.umd.js"
-    },
     "./native": {
       "types": "./dist/lib/in-native-renderer.d.ts",
       "import": "./dist/in-native-renderer.mjs",
@@ -41,7 +36,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --project tsconfig.build.json && vite build --config vite.in-renderer.build.config.js && vite build --config vite.in-video-renderer.build.config.js && vite build --config vite.in-banner-renderer.build.config.js && vite build --config vite.in-native-renderer.build.config.js",
+    "build": "tsc --project tsconfig.build.json && vite build --config vite.in-renderer.build.config.js && vite build --config vite.in-video-renderer.build.config.js && vite build --config vite.in-native-renderer.build.config.js",
     "test": "vitest"
   },
   "devDependencies": {
@@ -67,6 +62,7 @@
     "i18next": "^24.0.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "intersection-observer": "^0.12.2",
-    "js-base64": "^3.7.7"
+    "js-base64": "^3.7.7",
+    "whatwg-fetch": "^3.6.20"
   }
 }

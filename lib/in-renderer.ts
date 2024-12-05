@@ -1,4 +1,5 @@
 import 'intersection-observer';
-import { InRenderer } from "@/InRenderer";
+import 'whatwg-fetch';
+import { InRenderer } from "../src/InRenderer";
 
 export default InRenderer;

@@ -33,6 +33,8 @@ export class VideoRenderApplicationService {
     } catch (error) {
       if (error instanceof InvalidBidException) {
         this.domainLogger.invalidBid();
+      } else {
+        throw error;
       }
     }
   }

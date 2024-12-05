@@ -50,6 +50,8 @@ export class NativeRenderApplicationService {
         this.domainLogger.unsupportedNativeAsset();
       } else if (error instanceof MissingAdTemplateException) {
         this.domainLogger.missingAdTemplate();
+      } else {
+        throw error;
       }
     }
   }

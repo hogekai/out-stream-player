@@ -4,10 +4,9 @@ import { Bid } from "./type/bid";
 import { DomainLogger } from "./DomainLogger";
 import { Logger } from "./Logger";
 import { VideoRenderApplicationService } from "./VideoRenderApplicationService";
-import { BannerRenderApplicationService } from "./BannerRenderApplicationService";
-import { NativeRenderApplicationService } from "./NativeRenderApplicationService";
+import { InvalidBidException } from "./exception";
 
-export class InRenderer {
+export class InVideoRenderer {
   public async render(
     targetId: string,
     bid: Bid,
@@ -28,18 +27,8 @@ export class InRenderer {
       videoRenderApplicationService.render(target, bid, {
         logo: options.logo,
       });
-    } else if (bid.mediaType === "banner") {
-      const bannerRenderApplicationService = new BannerRenderApplicationService(
-        domainLogger
-      );
-      bannerRenderApplicationService.render(target, bid, {
-        clickThrough: options.clickThrough,
-      });
-    } else if (bid.mediaType === "native") {
-      const nativeRenderApplicationService = new NativeRenderApplicationService(
-        domainLogger
-      );
-      nativeRenderApplicationService.render(target, bid);
+    } else {
+      throw new InvalidBidException("Unsupported formats.");
     }
   }
 }

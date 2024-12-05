@@ -41,6 +41,8 @@ export class BannerRenderApplicationService
     } catch (error) {
       if (error instanceof InvalidBidException) {
         this.domainLogger.invalidBid();
+      } else {
+        throw error;
       }
     }
   }

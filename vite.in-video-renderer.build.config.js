@@ -18,9 +18,9 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: "./lib/in-renderer",
-      name: "InRenderer",
-      fileName: "in-renderer",
+      entry: "./lib/in-video-renderer",
+      name: "InVideoRenderer",
+      fileName: "in-video-renderer",
     },
     rollupOptions: {
       output: {
