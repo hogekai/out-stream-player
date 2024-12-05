@@ -1,7 +1,7 @@
 import { HTML5Render } from "@/core/HTML5AdRender";
 import { InlineFrameRender } from "@/core/InlineFrameRender";
 
-describe("HTML5 Render", () => {
+describe("HTML5 Ad Render", () => {
   beforeEach(() => {
     document.body.innerHTML = '<div id="target"></div>';
   });
