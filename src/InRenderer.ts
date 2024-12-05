@@ -1,11 +1,11 @@
-import "@/style/InRenderer.css";
-import "./polyfills";
-import { OutStreamVideoPlayer } from "@/core/video/OutStreamVideoPlayer";
 import { InRendererOptions } from "@/type";
 import { InvalidTargetElementException } from "./exception/InvalidTargetElementException";
-import { BannerRenderer } from "./core/banner/BannerRenderer";
-import { BannerBid, Bid, NativeBid, VideoBid } from "./type/bid";
-import { NativeRenderer } from "./core/native/NativeRenderer";
+import { Bid } from "./type/bid";
+import { DomainLogger } from "./DomainLogger";
+import { Logger } from "./Logger";
+import { VideoRenderApplicationService } from "./VideoRenderApplicationService";
+import { BannerRenderApplicationService } from "./BannerRenderApplicationService";
+import { NativeRenderApplicationService } from "./NativeRenderApplicationService";
 
 export class InRenderer {
   public async render(
@@ -13,50 +13,37 @@ export class InRenderer {
     bid: Bid,
     options: InRendererOptions = {}
   ) {
-    const target = document.getElementById(targetId) as HTMLDivElement;
+    const domainLogger = new DomainLogger(new Logger());
 
-    if (!target) {
-      throw new InvalidTargetElementException();
+    try {
+      const target = document.getElementById(targetId) as HTMLDivElement;
+
+      if (!target) {
+        throw new InvalidTargetElementException();
+      }
+
+      if (bid.mediaType === "video") {
+        const videoRenderApplicationService = new VideoRenderApplicationService(
+          domainLogger
+        );
+        videoRenderApplicationService.render(target, bid, {
+          logo: options.logo,
+        });
+      } else if (bid.mediaType === "banner") {
+        const bannerRenderApplicationService =
+          new BannerRenderApplicationService(domainLogger);
+        bannerRenderApplicationService.render(target, bid, {
+          clickThrough: options.clickThrough,
+        });
+      } else if (bid.mediaType === "native") {
+        const nativeRenderApplicationService =
+          new NativeRenderApplicationService(domainLogger);
+        nativeRenderApplicationService.render(target, bid);
+      }
+    } catch (error) {
+      if (error instanceof InvalidTargetElementException) {
+        domainLogger.invalidTargetElement();
+      }
     }
-
-    target.style.display = "block";
-
-    if (bid.mediaType === "video") {
-      await this.renderVideo(target, bid, options);
-    } else if (bid.mediaType === "banner") {
-      this.renderBanner(target, bid, options);
-    } else if (bid.mediaType === "native") {
-      this.renderNative(target, bid);
-    }
-  }
-
-  private async renderVideo(
-    target: HTMLDivElement,
-    bid: VideoBid,
-    options: InRendererOptions
-  ) {
-    const outStreamVideoPlayer = new OutStreamVideoPlayer(target, bid, {
-      logo: options.logo,
-    });
-    await outStreamVideoPlayer.play();
-  }
-
-  private renderBanner(
-    target: HTMLDivElement,
-    bid: BannerBid,
-    options: InRendererOptions
-  ) {
-    const bannerRenderer = new BannerRenderer(target, bid, {
-      clickThrough: options.clickThrough,
-    });
-    bannerRenderer.render();
-  }
-
-  private renderNative(
-    target: HTMLDivElement,
-    bid: NativeBid,
-  ) {
-    const bannerRenderer = new NativeRenderer(target, bid);
-    bannerRenderer.render();
   }
 }

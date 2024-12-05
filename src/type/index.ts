@@ -3,7 +3,7 @@ type LogoOption = {
   clickUrl?: string;
 };
 
-export type OutStreamVideoPlayerOptions = {
+export type VideoRenderOptions = {
   logo?: LogoOption;
 };
 

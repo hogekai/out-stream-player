@@ -2,106 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-
-    <script async src="./test/integration/prebid.js"></script>
-    <link rel="stylesheet" href="./src/style/InRenderer.css" />
-
-    <script type="module">
-      import { InRenderer } from "@/InRenderer";
-
-      var sizes = [[300, 250]];
-      var PREBID_TIMEOUT = 1000;
-      var adUnits = [
-        {
-          code: "app",
-          mediaTypes: {
-            video: {
-              context: "outstream",
-              playerSize: [640, 360],
-              minduration: 0,
-              maxduration: 120,
-              mimes: ["video/mp4"],
-              protocols: [5],
-            },
-          },
-          renderer: {
-            url: "./test.js",
-            render: (bid) => {
-              console.log(bid);
-              const inRenderer = new InRenderer();
-              inRenderer.render("app", bid);
-            },
-          },
-          bids: [
-            {
-              bidder: "michao",
-              params: {
-                placement: 123,
-                site: 123,
-              },
-            },
-            {
-              bidder: "pubmatic",
-              params: {
-                publisherId: "156276",
-                adSlot: "pubmatic_test",
-              },
-            },
-          ],
-        },
-      ];
-
-      var pbjs = window.pbjs || {};
-      pbjs.que = window.pbjs.que || [];
-
-      pbjs.que.push(function () {
-        pbjs.setConfig({
-          debug: true,
-          userSync: {
-            filterSettings: {
-              iframe: {
-                bidders: "*", // '*' represents all bidders
-                filter: "include",
-              },
-            },
-          },
-          schain: {
-            validation: "strict",
-            config: {
-              ver: "1.0",
-              complete: 1,
-              nodes: [
-                {
-                  asi: "indirectseller.com",
-                  sid: "00001",
-                  hp: 1,
-                },
-              ],
-            },
-          },
-        });
-        pbjs.addAdUnits(adUnits);
-        pbjs.requestBids({
-          timeout: PREBID_TIMEOUT,
-          bidsBackHandler: function () {
-            const highestCpmBids = pbjs.getHighestCpmBids("app");
-            pbjs.renderAd(document, highestCpmBids[0].adId);
-          },
-        });
-      });
-
-      // Define the passback HTML tag here.
-      // Note that this tag is usually in either Script tag form or iFrame form.
-      var passbackTagHtml = "TO ADD";
-    </script>
+    <title>InRenderer.js</title>
   </head>
   <body>
-    <div style="height: 2000px;"></div>
-    <div id="app" style="min-height: 200px"></div>
-
-    <script type="module"></script>
+    <h1>InRenderer.js</h1>
+    <h2>E2E Test Page</h2>
+    <ul>
+      <li>
+        <a href="./test/integration/e2e/banner.html" target="_blank">Banner</a>
+      </li>
+      <li>
+        <a href="./test/integration/e2e/video.html" target="_blank">Video</a>
+      </li>
+      <li>
+        <a href="./test/integration/e2e/native.html" target="_blank">Native</a>
+      </li>
+      <li>
+        <a href="./test/integration/e2e/nativeVideo.html" target="_blank"
+          >Native Video</a
+        >
+      </li>
+      <li>
+        <a href="./test/integration/e2e/multi.html" target="_blank"
+          >Multi Format (Banner, Video, Native, Native Video)</a
+        >
+      </li>
+    </ul>
   </body>
 </html>

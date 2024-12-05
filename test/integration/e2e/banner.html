@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InRenderer.js Banner Test Page</title>
+
+    <script async src="./resource/prebid.js"></script>
+
+    <script type="module">
+      import { InRenderer } from "@/InRenderer";
+
+      var sizes = [[300, 250]];
+      var PREBID_TIMEOUT = 2000;
+      var adUnits = [
+        {
+          code: "banner",
+          mediaTypes: {
+            banner: {
+              sizes: sizes,
+            },
+          },
+          renderer: {
+            url: "./resource/fakeRenderer.js",
+            render: (bid) => {
+              const inRenderer = new InRenderer();
+              inRenderer.render("banner", bid);
+            },
+          },
+          bids: [
+            {
+              bidder: "michao",
+              params: {
+                placement: "123",
+                site: 123,
+              },
+            },
+          ],
+        },
+      ];
+
+      var pbjs = window.pbjs || {};
+      pbjs.que = window.pbjs.que || [];
+
+      pbjs.que.push(function () {
+        pbjs.setConfig({
+          debug: true,
+        });
+        pbjs.addAdUnits(adUnits);
+        pbjs.requestBids({
+          timeout: PREBID_TIMEOUT,
+          bidsBackHandler: function () {
+            const highestCpmBids = pbjs.getHighestCpmBids("banner");
+            pbjs.renderAd('banner', highestCpmBids[0].adId);
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>InRenderer.js Banner Test Page</h1>
+    <div id="banner"></div>
+  </body>
+</html>

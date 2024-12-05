@@ -2,7 +2,9 @@ export type Asset =
   | { id: number; img: { url: string; width: string; height: string } }
   | { id: number; data: { value: string } }
   | { id: number; title: { text: string } }
-  | { id: number; video: { vasttag: string } };
+  | VideoAsset;
+
+export type VideoAsset = { id: number; video: { vasttag: string } };
 
 export type Link = {
   clicktrackers: string[];

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InRenderer.js Video Test Page</title>
+
+    <script async src="./resource/prebid.js"></script>
+
+    <script type="module">
+      import { InRenderer } from "@/InRenderer";
+
+      var PREBID_TIMEOUT = 2000;
+      var adUnits = [
+        {
+          code: "video",
+          mediaTypes: {
+            video: {
+              context: "outstream",
+              playerSize: [300, 250],
+              minduration: 0,
+              maxduration: 120,
+              mimes: ["video/mp4"],
+              protocols: [5],
+            },
+          },
+          renderer: {
+            url: "./resource/fakeRenderer.js",
+            render: (bid) => {
+              const inRenderer = new InRenderer();
+              inRenderer.render("video", bid);
+            },
+          },
+          bids: [
+            {
+              bidder: "michao",
+              params: {
+                placement: "123",
+                site: 123,
+              },
+            },
+          ],
+        },
+      ];
+
+      var pbjs = window.pbjs || {};
+      pbjs.que = window.pbjs.que || [];
+
+      pbjs.que.push(function () {
+        pbjs.setConfig({
+          debug: true,
+        });
+        pbjs.addAdUnits(adUnits);
+        pbjs.requestBids({
+          timeout: PREBID_TIMEOUT,
+          bidsBackHandler: function () {
+            const highestCpmBids = pbjs.getHighestCpmBids("video");
+            pbjs.renderAd('video', highestCpmBids[0].adId);
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>InRenderer.js Video Test Page</h1>
+    <div id="video"></div>
+  </body>
+</html>

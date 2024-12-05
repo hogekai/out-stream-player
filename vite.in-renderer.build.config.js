@@ -4,7 +4,7 @@ import { libInjectCss } from "vite-plugin-lib-inject-css";
 import autoprefixer from "autoprefixer";
 import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import postcssNesting from "postcss-nesting";
-import dtsPlugin from "vite-plugin-dts";
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
   plugins: [
@@ -24,26 +24,22 @@ export default defineConfig({
     rollupOptions: {
       output: {
         preserveModules: false,
-        plugins: {
-          output: {
-            plugins: [
-              getBabelOutputPlugin({
-                allowAllFormats: true,
-                presets: [
-                  [
-                    "@babel/preset-env",
-                    {
-                      targets: "> 0.25%, not dead, IE 11",
-                      useBuiltIns: "usage",
-                      modules: false,
-                      corejs: true,
-                    },
-                  ],
-                ],
-              }),
+        plugins: [
+          getBabelOutputPlugin({
+            allowAllFormats: true,
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  useBuiltIns: "usage",
+                  modules: false,
+                  corejs: true,
+                },
+              ],
             ],
-          },
-        },
+          }),
+          terser(),
+        ],
       },
     },
   },
