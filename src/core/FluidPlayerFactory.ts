@@ -131,7 +131,7 @@ export class FluidPlayerFactory {
   private async getVastTag(vastUrl?: string, vastXml?: string) {
     if (vastXml) {
       if (vastUrl) {
-        fetch(vastUrl);
+        navigator.sendBeacon(vastUrl);
       }
 
       return this.getVastDataUrl(vastXml);

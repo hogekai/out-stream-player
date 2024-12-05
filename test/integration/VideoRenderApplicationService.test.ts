@@ -5,6 +5,7 @@ import { mock } from "vitest-mock-extended";
 
 vi.mock("fluid-player");
 vi.mock('fetch');
+vi.mock('navigator');
 
 describe("Video render application service", () => {
   beforeEach(() => {
@@ -14,7 +15,8 @@ describe("Video render application service", () => {
 
   it('VAST XMLとVAST URLを指定するとVAST URLが発火され、でVAST XMlがレンダリング用の素材として使用される', async () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
-    const fetchMock = vi.spyOn(window, 'fetch');
+    vi.spyOn(window, 'fetch');
+    const beaconMock = vi.spyOn(window.navigator, 'sendBeacon').mockReturnValue(true);
     const domainLogger = mock<IDomainLogger>();
     const target = document.getElementById("target") as HTMLDivElement;
     const sut = new VideoRenderApplicationService(domainLogger);
@@ -48,8 +50,8 @@ describe("Video render application service", () => {
         },
       })
     );
-    expect(fetchMock).toHaveBeenCalledOnce();
-    expect(fetchMock).toHaveBeenCalledWith('https://example.com/vasturl');
+    expect(beaconMock).toHaveBeenCalledOnce();
+    expect(beaconMock).toHaveBeenCalledWith('https://example.com/vasturl');
   });
 
   it('VAST XMLを指定するとVAST XMLがVAST TAGに指定される', async () => {
