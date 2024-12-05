@@ -24,7 +24,7 @@ export class VideoRenderApplicationService {
         vastXml: bid.vastXml,
         logo: options.logo,
       });
-      const fluidPlayer = fluidPlayerFactory.create(() =>
+      const fluidPlayer = await fluidPlayerFactory.create(() =>
         this.render(targetElement, bid, options)
       );
 

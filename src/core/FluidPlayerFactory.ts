@@ -19,9 +19,7 @@ export class FluidPlayerFactory {
     this.options = options;
   }
 
-  public create(rePlay: () => any): FluidPlayerInstance {
-    this.validateVastTags(this.options.vastUrl, this.options.vastXml);
-
+  public async create(rePlay: () => any): Promise<FluidPlayerInstance> {
     const player = fluidPlayer(this.target, {
       layoutControls: {
         // @ts-ignore
@@ -58,8 +56,10 @@ export class FluidPlayerFactory {
             adText: i18n.t("LearnMore"),
             adClickable: true,
             roll: "preRoll",
-            vastTag: this.getVastUrl(this.options.vastUrl),
-            fallbackVastTags: [this.getVastDataUrl(this.options.vastXml)],
+            vastTag: await this.getVastTag(
+              this.options.vastUrl,
+              this.options.vastXml
+            ),
           },
         ],
         vastAdvanced: {
@@ -128,34 +128,30 @@ export class FluidPlayerFactory {
     return this.target.parentElement as HTMLDivElement;
   }
 
-  private validateVastTags(vastUrl?: string, vastXml?: string) {
-    if (!this.isValidVastUrl(vastUrl) && !this.isValidVastXml(vastXml)) {
-      throw new InvalidBidException();
-    }
-  }
+  private async getVastTag(vastUrl?: string, vastXml?: string) {
+    if (vastXml) {
+      if (vastUrl) {
+        fetch(vastUrl);
+      }
 
-  private getVastUrl(vastUrl?: string): string {
-    if (this.isValidVastUrl(vastUrl)) {
-      return vastUrl;
-    }
-
-    return "data:text/xml;charset=utf-8;base64,";
-  }
-
-  private getVastDataUrl(vastXml?: string): string {
-    if (this.isValidVastXml(vastXml)) {
-      return this.getVastDataUrlFromVastXml(vastXml);
+      return this.getVastDataUrl(vastXml);
+    } else if (vastUrl) {
+      const vast = await this.getVastByVastUrl(vastUrl);
+      return this.getVastDataUrl(vast);
     }
 
-    return "data:text/xml;charset=utf-8;base64,";
+    throw new InvalidBidException();
   }
 
-  private isValidVastUrl(vastUrl?: string): vastUrl is string {
-    return !!(vastUrl && isString(vastUrl) && isUrl(vastUrl));
+  private async getVastByVastUrl(vastUrl: string): Promise<string> {
+    const response = await fetch(vastUrl);
+    const vastXml = await response.text();
+
+    return vastXml;
   }
 
-  private isValidVastXml(vastXml?: string): vastXml is string {
-    return !!(vastXml && isString(vastXml) && vastXml.search(/<VAST/gi) !== -1);
+  private getVastDataUrl(vastXml: string): string {
+    return this.getVastDataUrlFromVastXml(vastXml);
   }
 
   private getVastDataUrlFromVastXml(vastXml: string): string {

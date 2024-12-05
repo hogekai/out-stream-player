@@ -47,7 +47,7 @@ export class NativeVideoRender {
     }
   }
 
-  private renderVideo({
+  private async renderVideo({
     targetElement,
     asset,
     playerWidth,
@@ -56,7 +56,7 @@ export class NativeVideoRender {
     const fluidPlayerFactory = new FluidPlayerFactory(targetElement, {
       vastXml: asset.video.vasttag,
     });
-    const fluidPlayer = fluidPlayerFactory.create(() =>
+    const fluidPlayer = await fluidPlayerFactory.create(() =>
       this.renderVideo({ targetElement, asset, playerHeight, playerWidth })
     );
 
