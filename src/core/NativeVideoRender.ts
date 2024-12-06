@@ -2,6 +2,7 @@ import { InvalidNativeVideoContainerException } from "@/exception";
 import { Asset, VideoAsset } from "@/type/native";
 import { VideoAdRender } from "./VideoAdRender";
 import { FluidPlayerFactory } from "./FluidPlayerFactory";
+import { ViewableTracker } from "./ViewabilityTracker";
 
 type RenderVideoProps = {
   targetElement: HTMLDivElement;
@@ -60,7 +61,7 @@ export class NativeVideoRender {
       this.renderVideo({ targetElement, asset, playerHeight, playerWidth })
     );
 
-    const videoAdRender = new VideoAdRender();
+    const videoAdRender = new VideoAdRender(new ViewableTracker());
     videoAdRender.render(
       targetElement,
       {
