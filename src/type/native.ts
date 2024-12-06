@@ -18,6 +18,25 @@ export type Native = {
     assets: Asset[];
     link: Link;
     privacy?: string;
+    eventtrackers?: EventTracker[];
   };
   adTemplate: string;
+};
+
+export type EventTracker = {
+  event: EventType;
+  method: EventTrackingMethod;
+  url?: string;
+};
+
+export enum EventType {
+  IMPRESSION =  1,
+  VIEWABLE_MRC50 =  2,
+  VIEWABLE_MRC100 = 3,
+  VIEWABLE_VIDEO50 = 4,
+};
+
+export enum EventTrackingMethod {
+  IMG = 1,
+  JS = 2,
 };

@@ -33,3 +33,18 @@ export interface IVideoRenderApplicationService {
 export interface INativeRenderApplicationService {
   render(targetElement: HTMLDivElement, bid: NativeBid): void;
 }
+
+export interface IViewableTracker {
+  trackViewable(targetElement: HTMLDivElement, callback: () => void): void;
+  trackViewableLost(targetElement: HTMLDivElement, callback: () => void): void;
+  trackViewableMrc50(targetElement: HTMLDivElement, callback: () => void): void;
+  trackViewableMrc100(
+    targetElement: HTMLDivElement,
+    callback: () => void
+  ): void;
+  trackViewableVideo50(
+    targetElement: HTMLDivElement,
+    callback: () => void
+  ): void;
+  cleanup(targetElement?: HTMLDivElement): void;
+}
