@@ -1,9 +1,15 @@
 import 'intersection-observer';
 import '@/style/InRenderer.css';
 import { VideoBid } from "@/type/bid";
-import { IVideoPlayer } from "@/type/interface";
+import { IVideoPlayer, IViewableTracker } from "@/type/interface";
 
 export class VideoAdRender {
+  private viewableTracker: IViewableTracker;
+
+  public constructor(viewableTracker: IViewableTracker) {
+    this.viewableTracker = viewableTracker;
+  }
+
   public render(
     targetElement: HTMLDivElement,
     bid: VideoBid,
@@ -11,19 +17,13 @@ export class VideoAdRender {
   ) {
     this.renderContainer(targetElement, bid);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            videoPlayer.play();
-          } else {
-            videoPlayer.pause();
-          }
-        });
-      },
-      { threshold: 0 }
-    );
-    observer.observe(targetElement);
+    this.viewableTracker.trackViewable(targetElement, () => {
+      videoPlayer.play();
+    });
+
+    this.viewableTracker.trackViewableLost(targetElement, () => {
+      videoPlayer.pause();
+    });
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {

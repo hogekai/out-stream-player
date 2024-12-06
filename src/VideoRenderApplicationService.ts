@@ -1,5 +1,6 @@
 import { FluidPlayerFactory } from "./core/FluidPlayerFactory";
 import { VideoAdRender } from "./core/VideoAdRender";
+import { ViewableTracker } from "./core/ViewabilityTracker";
 import { InvalidBidException } from "./exception";
 import { VideoRenderOptions } from "./type";
 import { VideoBid } from "./type/bid";
@@ -27,7 +28,7 @@ export class VideoRenderApplicationService {
         this.render(targetElement, bid, options)
       );
 
-      const videoAdRender = new VideoAdRender();
+      const videoAdRender = new VideoAdRender(new ViewableTracker());
       videoAdRender.render(targetElement, bid, fluidPlayer);
     } catch (error) {
       if (error instanceof InvalidBidException) {

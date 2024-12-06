@@ -18,7 +18,7 @@ describe("InVideoRenderer", () => {
       playerWidth: 300,
       playerHeight: 250,
       mediaType: "video" as const,
-      vastXml: "",
+      vastXml: "<VAST></VAST>",
       cpm: 100,
     };
 
