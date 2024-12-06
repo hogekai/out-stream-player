@@ -2,7 +2,6 @@ import { BannerRenderApplicationService } from "@/BannerRenderApplicationService
 import { InvalidTargetElementException } from "@/exception";
 import { InRenderer } from "@/InRenderer";
 import { NativeRenderApplicationService } from "@/NativeRenderApplicationService";
-import { Native } from "@/type/native";
 import { VideoRenderApplicationService } from "@/VideoRenderApplicationService";
 
 describe("InRenderer", () => {
@@ -79,7 +78,32 @@ describe("InRenderer", () => {
     await sut.render("target", bid);
 
     expect(renderSpy).toHaveBeenCalledOnce();
-    expect(renderSpy).toHaveBeenCalledWith(document.getElementById('target'), bid);
+    expect(renderSpy).toHaveBeenCalledWith(document.getElementById('target'), {
+      adUnitCode: "ad-unit",
+      width: 300,
+      height: 250,
+      mediaType: "native" as const,
+      native: {
+        impressionTrackers: [],
+        ortb: {
+          assets: [
+            {
+              id: 1,
+              title: {
+                text: "title text",
+              },
+            },
+          ],
+          link: {
+            url: "",
+            clicktrackers: [],
+            fallback: "",
+          },
+        },
+        adTemplate: "<div>##hb_native_asset_id_1##</div>",
+      },
+      cpm: 100,
+    }, {});
   });
 
   it("ターゲット要素が無効な場合は例外が発生する", async () => {

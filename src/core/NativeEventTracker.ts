@@ -1,13 +1,12 @@
 import { EventTracker, EventTrackingMethod, EventType } from "@/type/native";
-import { ViewableTracker } from "./ViewabilityTracker";
 import { IViewableTracker } from "@/type/interface";
 
 export class NativeEventTracker {
-    private viewableTracker: IViewableTracker;
+  private viewableTracker: IViewableTracker;
 
-    public constructor(viewableTracker: IViewableTracker) {
-        this.viewableTracker = viewableTracker;
-    }
+  public constructor(viewableTracker: IViewableTracker) {
+    this.viewableTracker = viewableTracker;
+  }
 
   public track(targetElement: HTMLDivElement, eventTrackers: EventTracker[]) {
     eventTrackers.forEach((eventTracker) => {
@@ -27,27 +26,23 @@ export class NativeEventTracker {
           this.generateTrackElement(url, eventTracker.method)
         );
       } else {
-
         if (eventTracker.event === EventType.VIEWABLE_MRC50) {
           this.viewableTracker.trackViewableMrc50(targetElement, () => {
             targetElement.appendChild(
               this.generateTrackElement(url, eventTracker.method)
             );
-            this.viewableTracker.cleanup(targetElement);
           });
         } else if (eventTracker.event === EventType.VIEWABLE_MRC100) {
-            this.viewableTracker.trackViewableMrc100(targetElement, () => {
+          this.viewableTracker.trackViewableMrc100(targetElement, () => {
             targetElement.appendChild(
               this.generateTrackElement(url, eventTracker.method)
             );
-            this.viewableTracker.cleanup(targetElement);
           });
         } else if (eventTracker.event === EventType.VIEWABLE_VIDEO50) {
-            this.viewableTracker.trackViewableVideo50(targetElement, () => {
+          this.viewableTracker.trackViewableVideo50(targetElement, () => {
             targetElement.appendChild(
               this.generateTrackElement(url, eventTracker.method)
             );
-            this.viewableTracker.cleanup(targetElement);
           });
         }
       }

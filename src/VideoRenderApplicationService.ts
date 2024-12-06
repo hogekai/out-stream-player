@@ -1,16 +1,20 @@
 import { FluidPlayerFactory } from "./core/FluidPlayerFactory";
 import { VideoAdRender } from "./core/VideoAdRender";
-import { ViewableTracker } from "./core/ViewabilityTracker";
 import { InvalidBidException } from "./exception";
 import { VideoRenderOptions } from "./type";
 import { VideoBid } from "./type/bid";
-import { IDomainLogger } from "./type/interface";
+import { IDomainLogger, IViewableTracker } from "./type/interface";
 
 export class VideoRenderApplicationService {
   private domainLogger: IDomainLogger;
+  private viewableTracker: IViewableTracker;
 
-  public constructor(domainLogger: IDomainLogger) {
+  public constructor(
+    domainLogger: IDomainLogger,
+    viewableTracker: IViewableTracker
+  ) {
     this.domainLogger = domainLogger;
+    this.viewableTracker = viewableTracker;
   }
 
   public async render(
@@ -28,8 +32,13 @@ export class VideoRenderApplicationService {
         this.render(targetElement, bid, options)
       );
 
-      const videoAdRender = new VideoAdRender(new ViewableTracker());
+      const videoAdRender = new VideoAdRender(this.viewableTracker);
       videoAdRender.render(targetElement, bid, fluidPlayer);
+      this.viewableTracker.trackViewableVideo50(targetElement, () => {
+        if (options.onImpressionViewable) {
+          options.onImpressionViewable();
+        }
+      });
     } catch (error) {
       if (error instanceof InvalidBidException) {
         this.domainLogger.invalidBid();

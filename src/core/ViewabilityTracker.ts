@@ -1,8 +1,6 @@
 import { IViewableTracker } from "@/type/interface";
 
 export class ViewableTracker implements IViewableTracker {
-  private observers: Map<HTMLDivElement, IntersectionObserver> = new Map();
-
   public trackViewable(
     targetElement: HTMLDivElement,
     callback: () => void
@@ -11,13 +9,11 @@ export class ViewableTracker implements IViewableTracker {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           callback();
-          observer.disconnect();
         }
       });
     });
 
     observer.observe(targetElement);
-    this.observers.set(targetElement, observer);
   }
 
   public trackViewableLost(
@@ -28,58 +24,38 @@ export class ViewableTracker implements IViewableTracker {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           callback();
-          observer.disconnect();
         }
       });
     });
 
     observer.observe(targetElement);
-    this.observers.set(targetElement, observer);
   }
 
   public trackViewableMrc50(
     targetElement: HTMLDivElement,
     callback: () => void
   ): void {
-    const observer = this.createObserver(targetElement, callback, 0.5, 1000);
+    const observer = this.createObserver(callback, 0.5, 1000);
     observer.observe(targetElement);
-    this.observers.set(targetElement, observer);
   }
 
   public trackViewableMrc100(
     targetElement: HTMLDivElement,
     callback: () => void
   ): void {
-    const observer = this.createObserver(targetElement, callback, 1, 1000);
+    const observer = this.createObserver(callback, 1, 1000);
     observer.observe(targetElement);
-    this.observers.set(targetElement, observer);
   }
 
   public trackViewableVideo50(
     targetElement: HTMLDivElement,
     callback: () => void
   ): void {
-    const observer = this.createObserver(targetElement, callback, 0.5, 2000);
+    const observer = this.createObserver(callback, 0.5, 2000);
     observer.observe(targetElement);
-    this.observers.set(targetElement, observer);
-  }
-
-  public cleanup(targetElement?: HTMLDivElement): void {
-    if (targetElement) {
-      const observer = this.observers.get(targetElement);
-      if (observer) {
-        observer.disconnect();
-        this.observers.delete(targetElement);
-      }
-    } else {
-      // Disconnect all observers
-      this.observers.forEach((observer) => observer.disconnect());
-      this.observers.clear();
-    }
   }
 
   private createObserver(
-    targetElement: HTMLDivElement,
     callback: () => void,
     threshold: number,
     duration: number
@@ -87,7 +63,7 @@ export class ViewableTracker implements IViewableTracker {
     let viewTime = 0;
     let startTime: number | null = null;
 
-    return new IntersectionObserver(
+    const observer =  new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
@@ -99,8 +75,7 @@ export class ViewableTracker implements IViewableTracker {
 
             if (viewTime >= duration) {
               callback();
-              this.observers.get(targetElement)?.disconnect();
-              this.observers.delete(targetElement);
+              observer.disconnect();
             }
           } else {
             startTime = null;
@@ -113,5 +88,7 @@ export class ViewableTracker implements IViewableTracker {
         root: null,
       }
     );
+
+    return observer;
   }
 }

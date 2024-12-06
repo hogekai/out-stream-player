@@ -35,7 +35,7 @@ var adUnits = [
                 <div class="thumbnail" style="background-image: url(##hb_native_asset_id_1##);"></div>
                 <div class="content">
                     <h1>
-                        <a href="##hb_native_linkurl##" target="_blank" class="in-renderer-native-link">##hb_native_asset_id_2##</a>
+                        <a href="##hb_native_linkurl##" target="_blank" class="pb-click">##hb_native_asset_id_2##</a>
                     </h1>
                     <p>##hb_native_asset_id_4##</p>
                     <div class="attribution">##hb_native_asset_id_3##</div>

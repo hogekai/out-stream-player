@@ -7,6 +7,7 @@ import { BannerBid } from "./type/bid";
 import {
   IBannerRenderApplicationService,
   IDomainLogger,
+  IViewableTracker,
 } from "./type/interface";
 import { isNumber, isString } from "./util/validator";
 
@@ -14,9 +15,11 @@ export class BannerRenderApplicationService
   implements IBannerRenderApplicationService
 {
   private domainLogger: IDomainLogger;
+  private viewableTracker: IViewableTracker;
 
-  public constructor(domainLogger: IDomainLogger) {
+  public constructor(domainLogger: IDomainLogger, viewableTracker: IViewableTracker) {
     this.domainLogger = domainLogger;
+    this.viewableTracker = viewableTracker;
   }
 
   public render(
@@ -38,6 +41,12 @@ export class BannerRenderApplicationService
 
       const html5AdRender = new HTML5AdRender();
       html5AdRender.render(inlineFrame, ad);
+
+      this.viewableTracker.trackViewableMrc50(targetElement, () => {
+        if (options.onImpressionViewable) {
+          options.onImpressionViewable();
+        }
+      });
     } catch (error) {
       if (error instanceof InvalidBidException) {
         this.domainLogger.invalidBid();

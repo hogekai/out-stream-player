@@ -46,5 +46,4 @@ export interface IViewableTracker {
     targetElement: HTMLDivElement,
     callback: () => void
   ): void;
-  cleanup(targetElement?: HTMLDivElement): void;
 }

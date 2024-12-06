@@ -5,6 +5,7 @@ type LogoOption = {
 
 export type VideoRenderOptions = {
   logo?: LogoOption;
+  onImpressionViewable?: () => void;
 };
 
 export type FluidPlayerFactoryOptions = {
@@ -15,11 +16,24 @@ export type FluidPlayerFactoryOptions = {
 
 export type BannerRenderOptions = {
   clickThrough?: string;
+  onImpressionViewable?: () => void;
 };
 
-export type NativeRenderOptions = {};
+export type NativeRenderOptions = {
+  onImpressionViewable?: () => void;
+};
 
 export type InRendererOptions = {
   clickThrough?: string;
   logo?: LogoOption;
+  onImpressionViewable?: () => void;
+};
+
+export type InVideoRendererOptions = {
+  onImpressionViewable?: () => void;
+  logo?: LogoOption;
+};
+
+export type InNativeRendererOptions = {
+  onImpressionViewable?: () => void;
 };

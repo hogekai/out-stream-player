@@ -1,4 +1,4 @@
-import { IDomainLogger } from "@/type/interface";
+import { IDomainLogger, IViewableTracker } from "@/type/interface";
 import { VideoRenderApplicationService } from "@/VideoRenderApplicationService";
 import fluidPlayer from "fluid-player";
 import { mock } from "vitest-mock-extended";
@@ -18,8 +18,9 @@ describe("Video render application service", () => {
     vi.spyOn(window, 'fetch');
     const beaconMock = vi.spyOn(window.navigator, 'sendBeacon').mockReturnValue(true);
     const domainLogger = mock<IDomainLogger>();
+    const viewableTracker = mock<IViewableTracker>();
     const target = document.getElementById("target") as HTMLDivElement;
-    const sut = new VideoRenderApplicationService(domainLogger);
+    const sut = new VideoRenderApplicationService(domainLogger, viewableTracker);
     const bid = {
       mediaType: "video" as const,
       playerWidth: 640,
@@ -58,7 +59,8 @@ describe("Video render application service", () => {
     const fluidPlayerMock = vi.mocked(fluidPlayer);
     const domainLogger = mock<IDomainLogger>();
     const target = document.getElementById("target") as HTMLDivElement;
-    const sut = new VideoRenderApplicationService(domainLogger);
+    const viewableTracker = mock<IViewableTracker>();
+    const sut = new VideoRenderApplicationService(domainLogger, viewableTracker);
     const bid = {
       mediaType: "video" as const,
       playerWidth: 640,
@@ -95,7 +97,8 @@ describe("Video render application service", () => {
     const domainLogger = mock<IDomainLogger>();
     const fetchMock = vi.spyOn(window, 'fetch').mockImplementation(async () => new Response('<VAST></VAST>'));
     const target = document.getElementById("target") as HTMLDivElement;
-    const sut = new VideoRenderApplicationService(domainLogger);
+    const viewableTracker = mock<IViewableTracker>();
+    const sut = new VideoRenderApplicationService(domainLogger, viewableTracker);
     const bid = {
       mediaType: "video" as const,
       playerWidth: 640,
@@ -137,13 +140,15 @@ describe("Video render application service", () => {
       .mockImplementation(() => fluidPlayerInstanceMock);
     const domainLogger = mock<IDomainLogger>();
     const target = document.getElementById("target") as HTMLDivElement;
-    const sut = new VideoRenderApplicationService(domainLogger);
+    const viewableTracker = mock<IViewableTracker>();
+    const sut = new VideoRenderApplicationService(domainLogger, viewableTracker);
     const bid = {
       mediaType: "video" as const,
       playerWidth: 640,
       playerHeight: 480,
       vastXml: "<VAST></VAST>",
     };
+
     await sut.render(target, bid, {
       logo: {
         imageUrl: "https://example.com/logo",
@@ -198,5 +203,33 @@ describe("Video render application service", () => {
         },
       }
     );
+  });
+
+  it('インプレッションビューアブルイベントが追跡される', async () => {
+    const domainLogger = mock<IDomainLogger>();
+    const target = document.getElementById("target") as HTMLDivElement;
+    const viewableTracker = mock<IViewableTracker>({
+      trackViewableVideo50: (_, callback) => {
+        callback();
+      }
+    });
+    const sut = new VideoRenderApplicationService(domainLogger, viewableTracker);
+    const bid = {
+      mediaType: "video" as const,
+      playerWidth: 640,
+      playerHeight: 480,
+      vastXml: "<VAST></VAST>",
+    };
+    const impressionViewableMock = vi.fn();
+
+    await sut.render(target, bid, {
+      logo: {
+        imageUrl: "https://example.com/logo",
+        clickUrl: "https://example.com/clickurl",
+      },
+      onImpressionViewable: impressionViewableMock
+    });
+
+    expect(impressionViewableMock).toHaveBeenCalledOnce();
   });
 });

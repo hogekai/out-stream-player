@@ -45,7 +45,8 @@ describe("InNativeRenderer", () => {
     expect(renderSpy).toHaveBeenCalledOnce();
     expect(renderSpy).toHaveBeenCalledWith(
       document.getElementById("target"),
-      bid
+      bid,
+      {}
     );
   });
 
