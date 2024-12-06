@@ -1,10 +1,10 @@
 export type Asset =
-  | { id: number; img: { url: string; width: string; height: string } }
-  | { id: number; data: { value: string } }
-  | { id: number; title: { text: string } }
+  | { id: number; img: { url: string; width: string; height: string }, link?: Link }
+  | { id: number; data: { value: string }, link?: Link }
+  | { id: number; title: { text: string }, link?: Link }
   | VideoAsset;
 
-export type VideoAsset = { id: number; video: { vasttag: string } };
+export type VideoAsset = { id: number; video: { vasttag: string }, link?: Link };
 
 export type Link = {
   clicktrackers: string[];
