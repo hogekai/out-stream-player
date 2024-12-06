@@ -1,7 +1,6 @@
-import { InvalidTargetElementException } from "@/exception";
-import { InRenderer } from "@/InRenderer";
+import { InvalidBidException, InvalidTargetElementException } from "@/exception";
+import { InNativeRenderer } from "@/InNativeRenderer";
 import { NativeRenderApplicationService } from "@/NativeRenderApplicationService";
-import { Native } from "@/type/native";
 
 describe("InNativeRenderer", () => {
   beforeEach(() => {
@@ -13,7 +12,7 @@ describe("InNativeRenderer", () => {
       NativeRenderApplicationService.prototype,
       "render"
     );
-    const sut = new InRenderer();
+    const sut = new InNativeRenderer();
     const bid = {
       adUnitCode: "ad-unit",
       width: 300,
@@ -50,9 +49,37 @@ describe("InNativeRenderer", () => {
     );
   });
 
+  it('バナー入札で無効な入札の例外が発生する', async () => {
+    const sut = new InNativeRenderer();
+    const bid = {
+      adUnitCode: "ad-unit",
+      width: 300,
+      height: 250,
+      mediaType: "banner" as const,
+      ad: "",
+      cpm: 100,
+    };
+
+    await expect(() => sut.render("target", bid)).rejects.toThrow(InvalidBidException);
+  });
+
+  it('動画入札で無効な入札の例外が発生する', async () => {
+    const sut = new InNativeRenderer();
+    const bid = {
+      adUnitCode: "ad-unit",
+      playerWidth: 300,
+      playerHeight: 250,
+      mediaType: "video" as const,
+      vastXml: "",
+      cpm: 100,
+    };
+
+    await expect(() => sut.render("target", bid)).rejects.toThrow(InvalidBidException);
+  });
+
   it("ターゲット要素が無効な場合は例外が発生する", async () => {
     document.getElementById("target")?.remove();
-    const sut = new InRenderer();
+    const sut = new InNativeRenderer();
 
     await expect(() => sut.render("target", {} as any)).rejects.toThrow(
       InvalidTargetElementException

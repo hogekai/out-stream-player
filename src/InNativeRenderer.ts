@@ -14,6 +14,7 @@ export class InNativeRenderer {
     if (!target) {
       throw new InvalidTargetElementException();
     }
+    
     if (bid.mediaType === "native") {
       const nativeRenderApplicationService = new NativeRenderApplicationService(
         domainLogger
