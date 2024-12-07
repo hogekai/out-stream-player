@@ -2,7 +2,7 @@ import { InvalidNativeVideoContainerException } from "@/exception";
 import { Asset, VideoAsset } from "@/type/native";
 import { VideoAdRender } from "./VideoAdRender";
 import { FluidPlayerFactory } from "./FluidPlayerFactory";
-import { ViewableTracker } from "./ViewabilityTracker";
+import { ViewableTracker } from "./ViewableTracker";
 
 type RenderVideoProps = {
   targetElement: HTMLDivElement;

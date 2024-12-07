@@ -5,7 +5,7 @@ import { DomainLogger } from "./DomainLogger";
 import { Logger } from "./Logger";
 import { VideoRenderApplicationService } from "./VideoRenderApplicationService";
 import { InvalidBidException } from "./exception";
-import { ViewableTracker } from "./core/ViewabilityTracker";
+import { ViewableTracker } from "./core/ViewableTracker";
 
 export class InVideoRenderer {
   public async render(

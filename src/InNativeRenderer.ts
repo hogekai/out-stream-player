@@ -4,7 +4,7 @@ import { DomainLogger } from "./DomainLogger";
 import { Logger } from "./Logger";
 import { NativeRenderApplicationService } from "./NativeRenderApplicationService";
 import { InvalidBidException } from "./exception";
-import { ViewableTracker } from "./core/ViewabilityTracker";
+import { ViewableTracker } from "./core/ViewableTracker";
 import { NativeRenderOptions } from "./type";
 
 export class InNativeRenderer {

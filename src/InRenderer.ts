@@ -6,7 +6,7 @@ import { Logger } from "./Logger";
 import { VideoRenderApplicationService } from "./VideoRenderApplicationService";
 import { BannerRenderApplicationService } from "./BannerRenderApplicationService";
 import { NativeRenderApplicationService } from "./NativeRenderApplicationService";
-import { ViewableTracker } from "./core/ViewabilityTracker";
+import { ViewableTracker } from "./core/ViewableTracker";
 
 export class InRenderer {
   public async render(
