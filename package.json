@@ -18,17 +18,20 @@
     ".": {
       "types": "./dist/lib/in-renderer.d.ts",
       "import": "./dist/in-renderer.mjs",
-      "require": "./dist/in-renderer.umd.js"
+      "require": "./dist/in-renderer.umd.js",
+      "style": "./dist/in-renderer.css"
     },
     "./video": {
       "types": "./dist/lib/in-video-renderer.d.ts",
       "import": "./dist/in-video-renderer.mjs",
-      "require": "./dist/in-video-renderer.umd.js"
+      "require": "./dist/in-video-renderer.umd.js",
+      "style": "./dist/in-video-renderer.css"
     },
     "./native": {
       "types": "./dist/lib/in-native-renderer.d.ts",
       "import": "./dist/in-native-renderer.mjs",
-      "require": "./dist/in-native-renderer.umd.js"
+      "require": "./dist/in-native-renderer.umd.js",
+      "style": "./dist/in-video-renderer.css"
     }
   },
   "repository": {
