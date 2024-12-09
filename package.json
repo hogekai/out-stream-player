@@ -31,7 +31,7 @@
       "types": "./dist/lib/in-native-renderer.d.ts",
       "import": "./dist/in-native-renderer.mjs",
       "require": "./dist/in-native-renderer.umd.js",
-      "style": "./dist/in-video-renderer.css"
+      "style": "./dist/in-native-renderer.css"
     }
   },
   "repository": {
