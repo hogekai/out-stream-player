@@ -6,7 +6,11 @@
     "dist",
     "index.d.ts"
   ],
-  "browserslist": "> 0.25%, not dead",
+  "browserslist": [
+    "> 0.25%",
+    "not IE 11",
+    "not op_mini all"
+  ],
   "main": "./dist/in-renderer.umd.js",
   "module": "./dist/in-renderer.mjs",
   "types": "./dist/lib/in-renderer.d.ts",

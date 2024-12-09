@@ -60,26 +60,24 @@ export class ViewableTracker implements IViewableTracker {
     threshold: number,
     duration: number
   ): IntersectionObserver {
-    let viewTime = 0;
-    let startTime: number | null = null;
-
-    const observer =  new IntersectionObserver(
+    let timeoutId: number | null = null;
+  
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
-            if (startTime === null) {
-              startTime = performance.now();
-            }
-
-            viewTime = performance.now() - (startTime || 0);
-
-            if (viewTime >= duration) {
-              callback();
-              observer.disconnect();
+            if (timeoutId === null) {
+              timeoutId = window.setTimeout(() => {
+                callback();
+                observer.disconnect();
+                timeoutId = null;
+              }, duration);
             }
           } else {
-            startTime = null;
-            viewTime = 0;
+            if (timeoutId !== null) {
+              window.clearTimeout(timeoutId);
+              timeoutId = null;
+            }
           }
         });
       },
@@ -88,7 +86,7 @@ export class ViewableTracker implements IViewableTracker {
         root: null,
       }
     );
-
+  
     return observer;
   }
 }
