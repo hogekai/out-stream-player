@@ -40,7 +40,7 @@ describe("Video render application service", () => {
           adList: [
             {
               adClickable: true,
-              adText: "LearnMore",
+              adText: "Learn More",
               roll: "preRoll",
               vastTag: "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
             },
@@ -79,7 +79,7 @@ describe("Video render application service", () => {
           adList: [
             {
               adClickable: true,
-              adText: "LearnMore",
+              adText: "Learn More",
               roll: "preRoll",
               vastTag: "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
             },
@@ -117,7 +117,7 @@ describe("Video render application service", () => {
           adList: [
             {
               adClickable: true,
-              adText: "LearnMore",
+              adText: "Learn More",
               roll: "preRoll",
               vastTag: "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
             },
@@ -192,7 +192,7 @@ describe("Video render application service", () => {
           adList: [
             {
               adClickable: true,
-              adText: "LearnMore",
+              adText: "Learn More",
               roll: "preRoll",
               vastTag: "data:text/xml;charset=utf-8;base64,PFZBU1Q+PC9WQVNUPg==",
             },
