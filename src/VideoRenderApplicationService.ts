@@ -33,7 +33,15 @@ export class VideoRenderApplicationService {
       );
 
       const videoAdRender = new VideoAdRender(this.viewableTracker);
-      videoAdRender.render(targetElement, bid, fluidPlayer);
+      videoAdRender.render(targetElement, bid, {
+        play: () => {
+          fluidPlayer.setVolume(0);
+          fluidPlayer.play();
+        },
+        pause: () => {
+          fluidPlayer.pause();
+        }
+      });
       this.viewableTracker.trackViewableVideo50(targetElement, () => {
         if (options.onImpressionViewable) {
           options.onImpressionViewable();
