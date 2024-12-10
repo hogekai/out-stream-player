@@ -14,6 +14,8 @@ export class FluidPlayerFactory {
     options: FluidPlayerFactoryOptions
   ) {
     const video = document.createElement("video");
+    video.defaultMuted = true;
+    video.muted = true;
     targetContainer.appendChild(video);
     this.target = video;
     this.options = options;
